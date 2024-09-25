@@ -37,7 +37,7 @@ class ItemCreate(BaseModel):
     name: str
     description: str
 
-# POST endpoint to create a new item
+
 @app.post("/items/")
 def create_item(item: ItemCreate, db: Session = Depends(get_db)):
     db_item = Item(name=item.name, description=item.description)
@@ -46,7 +46,7 @@ def create_item(item: ItemCreate, db: Session = Depends(get_db)):
     db.refresh(db_item)
     return db_item
 
-# GET endpoint to retrieve all items
+
 @app.get("/items/")
 def read_items(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     items = db.query(Item).offset(skip).limit(limit).all()
